@@ -1,0 +1,67 @@
+import { BadgeCheck, History } from 'lucide-react'
+import { Trans, useTranslation } from 'react-i18next'
+import { Button, Container } from '@/shared/ui'
+import { CertificatePreview } from './certificate-preview'
+import { TrustBadge } from './trust-badge'
+
+// Faqat kalitlar/ikonka modul darajasida saqlanadi — matnning o'zi t() bilan
+// render paytida olinadi, shunda til o'zgarganda yangilanib turadi.
+const STATS = [
+  { id: 'status', icon: BadgeCheck, labelKey: 'hero.stats.status.label', valueKey: 'hero.stats.status.value' },
+  { id: 'time', icon: History, labelKey: 'hero.stats.time.label', valueKey: 'hero.stats.time.value' },
+] as const
+
+export function Hero() {
+  const { t, i18n } = useTranslation()
+
+  return (
+    <section className="bg-[radial-gradient(120%_110%_at_88%_15%,#E8F4FA_0%,#F5FBFD_46%,#FFFFFF_100%)]">
+      <Container className="grid items-center gap-14 py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
+        <div>
+          <h1 className="text-heading max-w-[15ch] text-[40px] leading-[1.08] font-extrabold tracking-[-0.03em] sm:text-[52px]">
+            {/* uz/ru so'z tartibi farq qilgani uchun <Trans> ishlatiladi (prefix/suffix bo'lishdan afzal) */}
+            {/* t va i18n aniq prop sifatida uzatiladi: React Compiler statik i18nKey/components */}
+            {/* props'iga qarab elementni memoizatsiya qilib qo'yishi mumkin, shunda til */}
+            {/* o'zgarganda <Trans> qayta render bo'lmay qoladi. t/i18n har chaqiriqda yangi */}
+            {/* reference olib, bu memoizatsiyani bekor qiladi va til almashganda h1 yangilanadi. */}
+            <Trans
+              t={t}
+              i18n={i18n}
+              i18nKey="hero.title.full"
+              components={{ highlight: <span className="text-primary" /> }}
+            />
+          </h1>
+
+          <p className="text-body mt-6 max-w-[46ch] text-[16px] leading-[1.65]">
+            {t('hero.subtitle')}
+          </p>
+
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Button>{t('hero.ctaPrimary')}</Button>
+            <Button variant="soft">{t('hero.ctaSecondary')}</Button>
+          </div>
+
+          <div className="mt-10">
+            <TrustBadge />
+          </div>
+        </div>
+
+        <div className="bg-surface shadow-panel rounded-2xl p-4 sm:p-5">
+          <CertificatePreview />
+
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            {STATS.map(({ id, icon: Icon, labelKey, valueKey }) => (
+              <div key={id} className="bg-surface-muted rounded-xl px-5 py-4">
+                <Icon className="text-primary size-5" strokeWidth={2.2} aria-hidden="true" />
+                <p className="text-neutral mt-3 text-[11px] font-bold tracking-[0.14em] uppercase">
+                  {t(labelKey)}
+                </p>
+                <p className="text-heading mt-0.5 text-[15px] font-bold">{t(valueKey)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Container>
+    </section>
+  )
+}

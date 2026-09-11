@@ -1,0 +1,114 @@
+{
+  "header": {
+    "login": "Kirish",
+    "getStarted": "Boshlash"
+  },
+  "hero": {
+    "title": {
+      "full": "Ishonchli sertifikat <highlight>tekshirish</highlight>"
+    },
+    "subtitle": "IELTS, TOEFL va boshqa xalqaro hamda mahalliy sertifikatlarni tezkor va rasmiy ravishda tekshirish platformasi.",
+    "ctaPrimary": "Ro'yxatdan o'tish",
+    "ctaSecondary": "Kirish",
+    "stats": {
+      "status": {
+        "label": "Status",
+        "value": "Tasdiqlangan"
+      },
+      "time": {
+        "label": "Vaqt",
+        "value": "Real-vaqt"
+      }
+    },
+    "trustBadge": "{{count}}+ foydalanuvchilar ishonchi",
+    "certificatePreview": {
+      "ariaLabel": "Rasmiy muhr bilan tasdiqlangan sertifikat ekranda ko'rsatilmoqda"
+    }
+  },
+  "verificationSystem": {
+    "title": "Sertifikatlarni tekshirish tizimi",
+    "description": "Ushbu tizim orqali siz IELTS, TOEFL va boshqa xalqaro hamda mahalliy sertifikatlaringizning haqiqiyligini tez va qulay tarzda tekshirishingiz mumkin.",
+    "capabilities": {
+      "officialVerification": {
+        "title": "Rasmiy tekshiruv",
+        "text": "To'g'ridan-to'g'ri bazalar bilan integratsiya qilingan rasmiy natijalar."
+      },
+      "fastResults": {
+        "title": "Tezkor natijalar",
+        "text": "Sertifikat haqiqiyligini bir necha soniya ichida aniqlang."
+      },
+      "legalStatus": {
+        "title": "Rasmiy hujjat maqomi",
+        "text": "Tekshiruv natijalari yuridik kuchga ega va tasdiqlangan bo'ladi."
+      }
+    },
+    "archiveVisual": {
+      "gridAriaLabel": "Raqamli arxivdagi hujjatlar ro'yxati",
+      "scanAriaLabel": "Hujjat haqiqiyligini skanerlash"
+    }
+  },
+  "supportedCertificates": {
+    "title": "Qo'llab-quvvatlanadigan sertifikatlar",
+    "description": "Tizimimiz orqali dunyoning eng nufuzli imtihon natijalarini va mahalliy akademik sertifikatlarni tekshirishingiz mumkin.",
+    "ielts": {
+      "title": "IELTS",
+      "text": "International English Language Testing System natijalarini rasmiy bazadan tekshirish."
+    },
+    "secondaryTypes": {
+      "toefl": {
+        "title": "TOEFL",
+        "text": "Akademik ingliz tili darajasini tasdiqlovchi sertifikatlar."
+      },
+      "professional": {
+        "title": "Professional",
+        "text": "Kasbiy malaka oshirish va malaka darajasi sertifikatlari."
+      }
+    },
+    "academicLocal": {
+      "title": "Akademik va mahalliy",
+      "text": "Mahalliy oliygohlar va ta'lim markazlari tomonidan beriladigan akademik diplom va sertifikatlar."
+    },
+    "stats": {
+      "partners": {
+        "value": "150+",
+        "label": "Hamkorlar"
+      },
+      "support": {
+        "value": "24/7",
+        "label": "Qo'llab-quvvatlash"
+      },
+      "accuracy": {
+        "value": "99.9%",
+        "label": "Aniqlik"
+      }
+    }
+  },
+  "footer": {
+    "description": "Sertifikatlarni verifikatsiya qilish bo'yicha markaziy osiyodagi yetakchi platforma.",
+    "linkGroups": {
+      "platform": {
+        "title": "Platforma",
+        "links": {
+          "terms": "Xizmat ko'rsatish shartlari",
+          "privacy": "Maxfiylik siyosati"
+        }
+      },
+      "support": {
+        "title": "Yordam",
+        "links": {
+          "verificationApi": "Tekshiruv API'si",
+          "contactSupport": "Qo'llab-quvvatlash xizmati",
+          "institutionalLogin": "Muassasalar uchun kirish"
+        }
+      }
+    },
+    "copyright": "© {{year}} Digital Archivist Platform. Barcha huquqlar himoyalangan."
+  },
+  "common": {
+    "languageSwitcher": {
+      "label": "Til",
+      "uz": "O'zbekcha",
+      "ru": "Ruscha"
+    }
+  }
+}

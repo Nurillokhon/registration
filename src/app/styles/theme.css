@@ -1,0 +1,39 @@
+/* ---------------------------------------------------------------
+   Dizayn palitrasi — Stitch (Material) seed: teal #00796A
+   Tailwind v4 CSS-first konfiguratsiya: bu yerdagi har bir
+   --color-* tokeni bg-*, text-*, border-*, ring-* utilitalarini beradi.
+   --------------------------------------------------------------- */
+@theme {
+  /* Tipografiya */
+  --font-sans: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, sans-serif;
+
+  /* Asosiy rollar */
+  --color-primary: #00796a; /* seed — asosiy tugma, sarlavha aksenti, status ikonkasi */
+  --color-secondary: #2196f3; /* ikkilamchi aksent */
+  --color-tertiary: #1a1a1a; /* deyarli qora */
+  --color-neutral: #78909c; /* kulrang-havorang */
+
+  /* Sirtlar / fon */
+  --color-surface: #ffffff; /* asosiy fon */
+  --color-surface-muted: #e8f4fa; /* och ko'k gradient foni */
+  --color-surface-accent: #d2e8f0; /* "Kirish" tugmasi foni, och teal-ko'k */
+  --color-surface-sky: #f4fafd; /* juda och ko'k band */
+  --color-surface-shell: #eef1f5; /* futer foni */
+
+  /* Matn */
+  --color-heading: #14181f; /* sarlavha — to'q qora-ko'k */
+  --color-body: #5b6472; /* oddiy matn — kulrang */
+
+  /* Chiziqlar va aksent */
+  --color-line: #e3ebf1;
+  --color-gold: #c9a227; /* sertifikat medali */
+
+  /* Interaksiya holatlari — yuqoridagi ranglardan hosil qilingan */
+  --color-primary-hover: #00695c;
+  --color-primary-soft: #e0f2f0;
+  --color-secondary-hover: #1976d2;
+
+  /* Soyalar */
+  --shadow-card: 0 1px 2px rgba(20, 24, 31, 0.04), 0 8px 24px rgba(20, 24, 31, 0.05);
+  --shadow-panel: 0 4px 12px rgba(20, 24, 31, 0.05), 0 24px 60px rgba(20, 24, 31, 0.09);
+}
