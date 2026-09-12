@@ -1,37 +1,11 @@
 import type { ComponentPropsWithoutRef } from 'react'
-import { cn } from '@/shared/lib/cn'
+import { buttonVariants, type ButtonSize, type ButtonVariant } from './button-variants'
 
 type ButtonProps = ComponentPropsWithoutRef<'button'> & {
-  variant?: 'primary' | 'soft' | 'ghost'
-  size?: 'md' | 'sm'
+  variant?: ButtonVariant
+  size?: ButtonSize
 }
 
-const VARIANTS = {
-  primary: 'bg-primary text-white hover:bg-primary-hover',
-  soft: 'bg-surface-accent text-heading hover:bg-surface-accent/70',
-  ghost: 'text-body hover:text-heading',
-} as const
-
-const SIZES = {
-  md: 'px-6 py-3 text-[15px]',
-  sm: 'px-4 py-2 text-sm',
-} as const
-
-export function Button({
-  variant = 'primary',
-  size = 'md',
-  className,
-  ...props
-}: ButtonProps) {
-  return (
-    <button
-      className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-colors',
-        VARIANTS[variant],
-        SIZES[size],
-        className,
-      )}
-      {...props}
-    />
-  )
+export function Button({ variant, size, className, ...props }: ButtonProps) {
+  return <button className={buttonVariants({ variant, size, className })} {...props} />
 }

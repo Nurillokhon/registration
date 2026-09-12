@@ -1,7 +1,6 @@
 {
   "header": {
-    "login": "Kirish",
-    "getStarted": "Boshlash"
+    "login": "Kirish"
   },
   "hero": {
     "title": {
@@ -83,6 +82,100 @@
       }
     }
   },
+  "login": {
+    "title": "Tizimga kirish",
+    "subtitle": "Hisobingizga kirish uchun telefon raqamingiz va parolingizni kiriting",
+    "phone": {
+      "label": "Telefon raqami"
+    },
+    "password": {
+      "label": "Parol"
+    },
+    "submit": "Kirish",
+    "noAccount": "Hisobingiz yo'qmi?",
+    "signUp": "Ro'yxatdan o'tish",
+    "securityNote": "Parolingizni hech kimga bermang. Platforma xodimlari sizdan hech qachon parol so'ramaydi.",
+    "errors": {
+      "required": "Bu maydonni to'ldiring",
+      "phone": "Telefon raqamini to'liq kiriting"
+    }
+  },
+  "register": {
+    "stepperLabel": "Ro'yxatdan o'tish bosqichlari",
+    "steps": {
+      "personal": "Shaxsiy",
+      "account": "Hisob",
+      "verify": "Tekshirish"
+    },
+    "back": "Ortga qaytish",
+    "personal": {
+      "title": "Ro'yxatdan o'tish",
+      "subtitle": "Shaxsiy ma'lumotlaringizni kiriting",
+      "pinfl": {
+        "label": "JShShIR (14 ta raqam)",
+        "hint": "Pasportingizning pastki qismidagi 14 ta raqam"
+      },
+      "passportSeries": {
+        "label": "Seriya"
+      },
+      "passportNumber": {
+        "label": "Pasport raqami"
+      },
+      "submit": "Tekshirish va davom etish",
+      "haveAccount": "Hisobingiz bormi?",
+      "signIn": "Tizimga kirish",
+      "securityNote": "Ma'lumotlaringiz xavfsizligi biz uchun ustuvor. Platforma davlat reestrlari bilan real vaqt rejimida integratsiya qilingan."
+    },
+    "account": {
+      "title": "Hisob ma'lumotlari",
+      "subtitle": "Profilingiz uchun login va xavfsiz parol o'rnating",
+      "login": {
+        "label": "Email yoki telefon raqami",
+        "placeholder": "+998 90 123 45 67 yoki email"
+      },
+      "password": {
+        "label": "Yangi parol"
+      },
+      "confirmPassword": {
+        "label": "Parolni tasdiqlash"
+      },
+      "requirements": {
+        "title": "Parol talablari:",
+        "minLength": "Kamida 8 ta belgi",
+        "upperAndDigit": "Katta harf va raqam",
+        "met": "bajarildi",
+        "notMet": "bajarilmagan"
+      },
+      "submit": "Keyingi bosqichga o'tish",
+      "securityNote": "Parolingiz shifrlangan holda saqlanadi va uchinchi shaxslarga berilmaydi."
+    },
+    "verify": {
+      "title": "Tasdiqlash kodi",
+      "subtitle": "{{target}} ga yuborilgan 6 xonali kodni kiriting",
+      "codeLabel": "Tasdiqlash kodi",
+      "digitLabel": "{{index}}-raqam",
+      "noCode": "Kod kelmadimi?",
+      "resend": "Qayta yuborish",
+      "resent": "Kod qayta yuborildi",
+      "submit": "Tasdiqlash va yakunlash",
+      "securityNote": "Kod 5 daqiqa davomida amal qiladi. Uni hech kimga, hatto platforma xodimlariga ham bermang."
+    },
+    "success": {
+      "title": "Tabriklaymiz!",
+      "text": "Ro'yxatdan o'tish muvaffaqiyatli yakunlandi. Endi sertifikatlaringizni tekshirishingiz mumkin.",
+      "cta": "Bosh sahifaga qaytish"
+    },
+    "errors": {
+      "required": "Bu maydonni to'ldiring",
+      "pinfl": "JShShIR 14 ta raqamdan iborat bo'lishi kerak",
+      "passportSeries": "2 ta lotin harfi",
+      "passportNumber": "7 ta raqam kiriting",
+      "login": "Email yoki telefon raqamini to'g'ri kiriting",
+      "passwordWeak": "Parol talablarga javob bermaydi",
+      "passwordMismatch": "Parollar mos kelmadi",
+      "code": "6 xonali kodni to'liq kiriting"
+    }
+  },
   "footer": {
     "description": "Sertifikatlarni verifikatsiya qilish bo'yicha markaziy osiyodagi yetakchi platforma.",
     "linkGroups": {
@@ -109,6 +202,15 @@
       "label": "Til",
       "uz": "O'zbekcha",
       "ru": "Ruscha"
+    },
+    "passwordField": {
+      "toggle": "Parolni ko'rsatish"
+    },
+    "themeSwitcher": {
+      "label": "Mavzu",
+      "light": "Yorug' rejim",
+      "dark": "Qorong'i rejim",
+      "system": "Tizim rejimi"
     }
   }
 }

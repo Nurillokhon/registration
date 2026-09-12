@@ -32,8 +32,63 @@
   --color-primary-hover: #00695c;
   --color-primary-soft: #e0f2f0;
   --color-secondary-hover: #1976d2;
+  --color-danger: #c62828; /* forma xatolari — oq fonda ~5.6:1 kontrast */
+
+  /* Primary fon ustidagi matn/ikonka rangi — light'da doim oq, lekin dark'da
+     primary o'zi ochroq bo'lib qolgani uchun bu token pastda qayta belgilanadi. */
+  --color-on-primary: #ffffff;
 
   /* Soyalar */
   --shadow-card: 0 1px 2px rgba(20, 24, 31, 0.04), 0 8px 24px rgba(20, 24, 31, 0.05);
   --shadow-panel: 0 4px 12px rgba(20, 24, 31, 0.05), 0 24px 60px rgba(20, 24, 31, 0.09);
+}
+
+/* ---------------------------------------------------------------
+   Qorong'i rejim — @theme'dagi bilan bir xil semantik tokenlar,
+   faqat qiymatlari boshqa. Komponent kodi (bg-surface, text-heading...)
+   umuman o'zgarmaydi — .dark klassi <html>'ga qo'yilishi bilanoq CSS
+   o'zgaruvchilari pastdan yuqoriga meros bo'lib, barcha utilitalar
+   avtomatik yangi qiymatni oladi.
+
+   Palitra: teal brend saqlanadi, lekin --color-primary quyuq
+   (#00796a) o'rniga ochroq #2dd4bf'ga o'tadi — chunki endi u to'q
+   fon (--color-surface) ustida MATN/IKONKA sifatida ham ishlatiladi
+   va AA kontrastini (~9:1) faqat shunday saqlab qolish mumkin.
+   Buning oqibati sifatida primary tugma foni ham ochroq bo'lib
+   qoladi, shu sabab --color-on-primary oq emas, deyarli qora
+   (#08120f) bo'ladi — tugma matni bilan foni orasidagi kontrast
+   ~9:1 bo'lib qoladi (oq matn bo'lganda ~1.9:1 bo'lib, WCAG AA'dan
+   o'tmas edi).
+   --------------------------------------------------------------- */
+.dark {
+  --color-primary: #2dd4bf;
+  --color-secondary: #2196f3; /* #2196f3 to'q fonda ham ~5.9:1 kontrast beradi, o'zgartirish shart emas */
+  --color-tertiary: #e5e9ee;
+  --color-neutral: #9fb1bc;
+
+  --color-surface: #0f141a;
+  --color-surface-muted: #161d24;
+  --color-surface-accent: #1b2b2a;
+  --color-surface-sky: #121821;
+  --color-surface-shell: #0a0d11;
+
+  --color-heading: #f3f6f9; /* --color-surface'ga nisbatan ~17:1 kontrast */
+  --color-body: #a7b2be; /* --color-surface'ga nisbatan ~8.8:1 kontrast */
+
+  --color-line: #232c34;
+  --color-gold: #e0b43a; /* to'q fonda ko'proq "yaltirasin" uchun biroz ochroq */
+
+  --color-primary-hover: #22b8a4;
+  --color-primary-soft: #123934;
+  --color-secondary-hover: #64b5f6;
+  --color-danger: #f87171; /* to'q fonda ~7:1 kontrast */
+
+  --color-on-primary: #08120f; /* --color-primary'ga nisbatan ~9:1 kontrast */
+
+  /* Qora fonda och soya deyarli ko'rinmaydi — shuning uchun qorong'i
+     rejimda soyalar quyuqroq va tarqoqroq qilib berilgan. */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-panel: 0 4px 12px rgba(0, 0, 0, 0.5), 0 24px 60px rgba(0, 0, 0, 0.45);
+
+  color-scheme: dark;
 }

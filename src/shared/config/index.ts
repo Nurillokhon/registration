@@ -12,3 +12,5 @@ export type Language = (typeof SUPPORTED_LANGUAGES)[number]
 export const DEFAULT_LANGUAGE: Language = 'uz'
 
 export const LANGUAGE_STORAGE_KEY = 'lang'
+
+export { ROUTES } from './routes'

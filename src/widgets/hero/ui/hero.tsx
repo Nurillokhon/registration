@@ -1,6 +1,8 @@
 import { BadgeCheck, History } from 'lucide-react'
 import { Trans, useTranslation } from 'react-i18next'
-import { Button, Container } from '@/shared/ui'
+import { Link } from 'react-router'
+import { ROUTES } from '@/shared/config'
+import { buttonVariants, Container } from '@/shared/ui'
 import { CertificatePreview } from './certificate-preview'
 import { TrustBadge } from './trust-badge'
 
@@ -15,7 +17,9 @@ export function Hero() {
   const { t, i18n } = useTranslation()
 
   return (
-    <section className="bg-[radial-gradient(120%_110%_at_88%_15%,#E8F4FA_0%,#F5FBFD_46%,#FFFFFF_100%)]">
+    // Xom hex gradient o'rniga CSS o'zgaruvchilari: shu 3 pog'ona surface
+    // token'i orqali beriladi, shunda dark rejimda gradient ham to'g'ri o'zgaradi.
+    <section className="bg-[radial-gradient(120%_110%_at_88%_15%,var(--color-surface-muted)_0%,var(--color-surface-sky)_46%,var(--color-surface)_100%)]">
       <Container className="grid items-center gap-14 py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
         <div>
           <h1 className="text-heading max-w-[15ch] text-[40px] leading-[1.08] font-extrabold tracking-[-0.03em] sm:text-[52px]">
@@ -37,8 +41,12 @@ export function Hero() {
           </p>
 
           <div className="mt-9 flex flex-wrap gap-3">
-            <Button>{t('hero.ctaPrimary')}</Button>
-            <Button variant="soft">{t('hero.ctaSecondary')}</Button>
+            <Link to={ROUTES.register} className={buttonVariants()}>
+              {t('hero.ctaPrimary')}
+            </Link>
+            <Link to={ROUTES.login} className={buttonVariants({ variant: 'soft' })}>
+              {t('hero.ctaSecondary')}
+            </Link>
           </div>
 
           <div className="mt-10">

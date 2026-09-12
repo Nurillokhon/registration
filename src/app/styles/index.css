@@ -2,6 +2,12 @@
 @import '@fontsource-variable/plus-jakarta-sans';
 @import './theme.css';
 
+/* Tailwind v4'da dark: prefiksi shu variant orqali ro'yxatdan o'tkaziladi.
+   Standart holatda Tailwind media-query (prefers-color-scheme) asosidagi
+   dark: beradi, bizga esa .dark klassi asosidagi (ThemeProvider boshqaradigan)
+   variant kerak — shunda "system" rejimidan tashqari light/dark ham ishlaydi. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   color-scheme: light;
 }
@@ -13,6 +19,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Mavzu tugmasi bosilganda fon/matn rangi silliq almashadi. Sahifa birinchi
+     ochilganda esa .dark klassi index.html'dagi bloklovchi skript orqali
+     paintdan OLDIN qo'yilgani uchun bu transition flash hosil qilmaydi. */
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Klaviatura bilan yurganda fokus doim ko'rinsin */
@@ -20,6 +30,14 @@ body {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* Ikonka yoki tugmali maydonlarda fokus halqasi input'ning o'ziga emas, o'ramga
+   (focus-within:ring) chiziladi — ichki input'da ikkinchi chiziq chiqmasin.
+   Tailwind'ning outline-none utilitasi bu yerda yordam bermaydi: yuqoridagi
+   qoida @layer'siz, shuning uchun har qanday layer'dagi utilitadan ustun turadi. */
+[data-field-control] input:focus-visible {
+  outline: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -21,7 +21,11 @@ export function TrustBadge() {
           <span
             key={initials}
             aria-hidden="true"
-            className={`${tone} ring-surface flex size-8 items-center justify-center rounded-full text-[11px] font-bold text-white ring-2`}
+            // text-white emas — text-on-primary: dark rejimda bg-primary
+            // ochroq bo'lib qolgani uchun bu token avtomatik mos matn
+            // rangiga (deyarli qora) o'zgaradi, boshqa ikki tonda (secondary,
+            // neutral) esa oq bilan bir xil yoki undan yaxshiroq kontrast beradi.
+            className={`${tone} ring-surface text-on-primary flex size-8 items-center justify-center rounded-full text-[11px] font-bold ring-2`}
           >
             {initials}
           </span>

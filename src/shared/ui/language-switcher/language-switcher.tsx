@@ -31,7 +31,9 @@ export function LanguageSwitcher() {
             aria-label={t(LANGUAGE_ARIA_LABEL_KEYS[lng])}
             onClick={() => i18n.changeLanguage(lng)}
             className={cn(
-              'rounded-md px-2 py-1 text-[11px] font-bold uppercase transition-colors',
+              // Mobilda torroq gorizontal padding — 375px'da header sig'ishi
+              // uchun; sm'dan boshlab asl o'lchamga qaytadi.
+              'rounded-md px-1.5 py-1 text-[11px] font-bold uppercase transition-colors sm:px-2',
               isActive
                 ? 'bg-surface text-heading shadow-card'
                 : 'text-body hover:text-heading',

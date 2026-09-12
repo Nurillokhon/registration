@@ -5,6 +5,26 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>newsertifacete</title>
+    <script>
+      // Mavzuni React render bo'lishidan OLDIN qo'llaymiz — aks holda birinchi
+      // paint light rejimda chizilib, keyin dark'ga "miltillab" o'tib ketardi (FOUC).
+      // STORAGE_KEY qiymati src/shared/lib/theme/constants.ts'dagi
+      // THEME_STORAGE_KEY bilan QATʼIY bir xil bo'lishi shart.
+      ;(function () {
+        try {
+          var STORAGE_KEY = 'theme'
+          var stored = localStorage.getItem(STORAGE_KEY)
+          var mode = stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system'
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+          var isDark = mode === 'dark' || (mode === 'system' && prefersDark)
+          var root = document.documentElement
+          if (isDark) root.classList.add('dark')
+          root.style.colorScheme = isDark ? 'dark' : 'light'
+        } catch (e) {
+          // localStorage/matchMedia mavjud bo'lmasa — light rejim bilan davom etamiz
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>
