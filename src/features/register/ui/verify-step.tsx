@@ -3,7 +3,7 @@
 import { MailCheck } from "lucide-react";
 import { useId, useState, type FormEventHandler } from "react";
 import { useTranslation } from "react-i18next";
-import { setStoredUser } from "@/entities/user";
+import { isUserRole, setStoredUser } from "@/entities/user";
 import { getApiErrorMessage, setTokens } from "@/shared/api";
 import { toApiPhone } from "@/shared/lib/phone";
 import { FormAlert, FormHeader, InfoNote } from "@/shared/ui";
@@ -43,10 +43,15 @@ export function VerifyStep({ phone, onBack }: VerifyStepProps) {
         phone: toApiPhone(phone),
         code: code.join(""),
       });
+      // Login bilan bir xil: ilovada bo'limi yo'q rol kelsa kirish to'xtatiladi
+      if (!isUserRole(user.role)) {
+        setApiError(t("register.errors.apiFallback"));
+        return;
+      }
       // Kod to'g'ri bo'lsa foydalanuvchi darhol tizimga kirgan hisoblanadi
       setTokens({ access, refresh });
-      // Login bilan bir xil: foydalanuvchi ham saqlanadi, shunda dashboard
-      // rolni profil so'rovi kelguncha kutmasdan biladi.
+      // Foydalanuvchi ham saqlanadi, shunda dashboard rolni profil so'rovi
+      // kelguncha kutmasdan biladi.
       setStoredUser(user);
       navigate(ROUTES.dashboard);
       // onSubmit()

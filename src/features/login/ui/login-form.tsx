@@ -2,7 +2,7 @@ import { ArrowRight, KeyRound, LoaderCircle, Lock, Phone } from 'lucide-react'
 import { useState, type FormEventHandler } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router'
-import { setStoredUser } from '@/entities/user'
+import { isUserRole, setStoredUser } from '@/entities/user'
 import { getApiErrorMessage, setTokens } from '@/shared/api'
 import { ROUTES } from '@/shared/config'
 import { formatUzPhone, toApiPhone } from '@/shared/lib/phone'
@@ -50,11 +50,15 @@ export function LoginForm() {
         phone: toApiPhone(values.phone),
         password: values.password,
       })
+      // Ilovada bo'limi yo'q rol kelsa kirish to'xtatiladi — tokenlar saqlanmaydi,
+      // aks holda RequireAuth foydalanuvchini hech qaysi bo'limga kiritmay qolardi.
+      if (!isUserRole(user.role)) {
+        setApiError(t('login.errors.apiFallback'))
+        return
+      }
       setTokens({ access, refresh })
       // Foydalanuvchi ham saqlanadi — dashboard sidebar'i rolni profil so'rovi
-      // kelguncha kutmasdan ko'rsatadi. O'qishda qiymat qayta tekshiriladi
-      // (entities/user/model/user-storage.ts), shuning uchun kutilmagan rol kelsa
-      // saqlangan qiymat shunchaki e'tiborsiz qoladi.
+      // kelguncha kutmasdan ko'rsatadi.
       setStoredUser(user)
       navigate(ROUTES.dashboard)
     } catch (error) {

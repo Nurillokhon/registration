@@ -2,9 +2,24 @@ import { useEffect } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { clearTokens, getAccessToken, useGetRequest } from '@/shared/api'
 import { clearStoredUser, getStoredUser, setStoredUser } from '../model/user-storage'
-import type { CurrentUser, UserProfile, UserRole } from '../model/types'
+import { isUserRole, type CurrentUser, type UserProfile, type UserRole } from '../model/types'
 
 const PROFILE_ENDPOINT = '/account/user-profile/'
+
+// Profil javobi CurrentUser'dan boshqa shaklda (swagger'da phone yo'q, role
+// esa oddiy string) — to'g'ridan-to'g'ri saqlansa, getStoredUser uni yaroqsiz
+// deb tashlab yuborar, noma'lum rol esa menyu/marshrut lug'atlarida topilmay
+// ilovani yiqitar edi. Ilovada bo'limi yo'q rol kelsa null qaytadi.
+function toCurrentUser(profile: UserProfile): CurrentUser | null {
+  if (!isUserRole(profile.role)) return null
+
+  return {
+    phone: profile.phone ?? getStoredUser()?.phone ?? '',
+    photo: profile.photo ?? null,
+    full_name: profile.full_name,
+    role: profile.role,
+  }
+}
 
 /**
  * Profil sahifasi uchun to'liq profil. useCurrentUser bilan bir xil so'rov
@@ -36,18 +51,21 @@ export function useCurrentUser() {
   const hasToken = Boolean(getAccessToken())
   const storedUser = getStoredUser()
 
-  const { data, isLoading, isError } = useGetRequest<CurrentUser>({
+  const { data, isLoading, isError } = useGetRequest<UserProfile>({
     url: PROFILE_ENDPOINT,
     options: {
       enabled: hasToken,
     },
   })
 
+  const profileUser = data ? toCurrentUser(data) : null
+
   useEffect(() => {
-    if (data) setStoredUser(data)
+    const nextUser = data ? toCurrentUser(data) : null
+    if (nextUser) setStoredUser(nextUser)
   }, [data])
 
-  const user = data ?? storedUser
+  const user = profileUser ?? storedUser
   const role: UserRole | null = user?.role ?? null
 
   return {

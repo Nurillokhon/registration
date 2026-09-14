@@ -62,13 +62,16 @@ export function CertificatesPanel({ profile }: { profile: UserProfile }) {
         ))}
       </ul>
 
-      <Link
-        to={ROUTES.dashboardCertificates}
-        className={buttonVariants({ variant: 'soft', className: 'mt-8' })}
-      >
-        {t('dashboard.profile.certificates.viewAll')}
-        <ArrowRight className="size-4 shrink-0" strokeWidth={2.4} aria-hidden="true" />
-      </Link>
+      {/* Sertifikatlar sahifasi faqat nomzod bo'limida bor */}
+      {profile.role === 'candidate' && (
+        <Link
+          to={ROUTES.certificates}
+          className={buttonVariants({ variant: 'soft', className: 'mt-8' })}
+        >
+          {t('dashboard.profile.certificates.viewAll')}
+          <ArrowRight className="size-4 shrink-0" strokeWidth={2.4} aria-hidden="true" />
+        </Link>
+      )}
     </div>
   )
 }

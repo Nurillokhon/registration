@@ -30,7 +30,7 @@ type NavItemKey =
 export type DashboardMenuItem = {
   key: NavItemKey
   to: string
-  /** Faqat /dashboard indeks bandi uchun — bola marshrutlarda faol bo'lib qolmasin. */
+  /** Faqat /dashboard bandi uchun — boshqa sahifalarda faol bo'lib qolmasin. */
   end?: boolean
   icon: LucideIcon
   labelKey: `dashboard.nav.items.${NavItemKey}`
@@ -41,14 +41,14 @@ export type DashboardMenuItem = {
 
 const NAV_ITEM_CONFIG: Record<NavItemKey, Omit<DashboardMenuItem, 'key' | 'labelKey'>> = {
   dashboard: { to: ROUTES.dashboard, end: true, icon: LayoutDashboard },
-  certificates: { to: ROUTES.dashboardCertificates, icon: FileCheck2 },
-  newApplication: { to: ROUTES.dashboardApplicationsNew, icon: FilePlus2 },
-  applications: { to: ROUTES.dashboardApplications, icon: ClipboardList },
-  reviews: { to: ROUTES.dashboardReviews, icon: History },
-  experts: { to: ROUTES.dashboardExperts, icon: Users },
-  forms: { to: ROUTES.dashboardForms, icon: ListChecks },
-  analytics: { to: ROUTES.dashboardAnalytics, icon: BarChart3 },
-  profile: { to: ROUTES.dashboardProfile, icon: UserRound },
+  certificates: { to: ROUTES.certificates, icon: FileCheck2 },
+  newApplication: { to: ROUTES.newApplication, icon: FilePlus2 },
+  applications: { to: ROUTES.applications, icon: ClipboardList },
+  reviews: { to: ROUTES.reviews, icon: History },
+  experts: { to: ROUTES.experts, icon: Users },
+  forms: { to: ROUTES.forms, icon: ListChecks },
+  analytics: { to: ROUTES.analytics, icon: BarChart3 },
+  profile: { to: ROUTES.profile, icon: UserRound },
 }
 
 function buildItem(key: NavItemKey): DashboardMenuItem {
@@ -56,6 +56,7 @@ function buildItem(key: NavItemKey): DashboardMenuItem {
 }
 
 // Har bir rol uchun "ASOSIY BO'LIMLAR" bo'limidagi bandlar tartib bilan.
+// Sahifa ruxsatlari router'da (app/providers/router-provider.tsx) — ular mos bo'lishi kerak.
 const ROLE_MAIN_ITEM_KEYS: Record<UserRole, readonly NavItemKey[]> = {
   candidate: ['dashboard', 'certificates', 'newApplication'],
   expert: ['dashboard', 'applications', 'reviews'],

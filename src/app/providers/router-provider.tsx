@@ -1,4 +1,9 @@
-import { createBrowserRouter, RouterProvider as ReactRouterProvider } from 'react-router'
+/** @format */
+
+import {
+  createBrowserRouter,
+  RouterProvider as ReactRouterProvider,
+} from "react-router";
 import {
   DashboardAnalyticsPage,
   DashboardApplicationsPage,
@@ -9,42 +14,92 @@ import {
   DashboardNewApplicationPage,
   DashboardProfilePage,
   DashboardReviewsPage,
-} from '@/pages/dashboard'
-import { HomePage } from '@/pages/home'
-import { LoginPage } from '@/pages/login'
-import { RegisterPage } from '@/pages/register'
-import { ROUTES } from '@/shared/config'
-import { DashboardLayout } from '@/widgets/dashboard-layout'
-import { RequireAuth } from './require-auth'
+} from "@/pages/dashboard";
+import { HomePage } from "@/pages/home";
+import { LoginPage } from "@/pages/login";
+import { RegisterPage } from "@/pages/register";
+import { ROUTES } from "@/shared/config";
+import { DashboardLayout } from "@/widgets/dashboard-layout";
+import { RequireAuth } from "./require-auth";
 
-// Marshrut daraxti barcha rollar uchun bitta — sidebar bandlarigina rol
-// bo'yicha filtrlanadi (widgets/dashboard-layout/model/menu.ts). Bu yerda
-// rolga qarab bloklash qilinmaydi, chunki bu keyingi bosqichga tegishli.
+// Kabinet sahifalari bitta yo'lsiz (pathless) layout ostida: tashqi RequireAuth
+// faqat kirganlikni tekshiradi, sahifadagi RequireAuth esa rolni — ruxsat
+// berilmagan rol /dashboard'ga qaytariladi. `roles` berilmagan sahifa
+// (bosh sahifa, profil) barcha rollar uchun ochiq.
+// Ruxsatlar sidebar menyusi (widgets/dashboard-layout/model/menu.ts) bilan mos bo'lishi kerak.
 const router = createBrowserRouter([
   { path: ROUTES.home, element: <HomePage /> },
   { path: ROUTES.login, element: <LoginPage /> },
   { path: ROUTES.register, element: <RegisterPage /> },
   {
-    path: ROUTES.dashboard,
     element: (
       <RequireAuth>
         <DashboardLayout />
       </RequireAuth>
     ),
     children: [
-      { index: true, element: <DashboardIndexPage /> },
-      { path: 'certificates', element: <DashboardCertificatesPage /> },
-      { path: 'applications/new', element: <DashboardNewApplicationPage /> },
-      { path: 'applications', element: <DashboardApplicationsPage /> },
-      { path: 'reviews', element: <DashboardReviewsPage /> },
-      { path: 'experts', element: <DashboardExpertsPage /> },
-      { path: 'forms', element: <DashboardFormsPage /> },
-      { path: 'analytics', element: <DashboardAnalyticsPage /> },
-      { path: 'profile', element: <DashboardProfilePage /> },
+      { path: ROUTES.dashboard, element: <DashboardIndexPage /> },
+      {
+        path: ROUTES.certificates,
+        element: (
+          <RequireAuth roles={["candidate"]}>
+            <DashboardCertificatesPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: ROUTES.newApplication,
+        element: (
+          <RequireAuth roles={["candidate"]}>
+            <DashboardNewApplicationPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: ROUTES.applications,
+        element: (
+          <RequireAuth roles={["expert", "admin"]}>
+            <DashboardApplicationsPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: ROUTES.reviews,
+        element: (
+          <RequireAuth roles={["expert"]}>
+            <DashboardReviewsPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: ROUTES.experts,
+        element: (
+          <RequireAuth roles={["admin"]}>
+            <DashboardExpertsPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: ROUTES.forms,
+        element: (
+          <RequireAuth roles={["admin"]}>
+            <DashboardFormsPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: ROUTES.analytics,
+        element: (
+          <RequireAuth roles={["admin"]}>
+            <DashboardAnalyticsPage />
+          </RequireAuth>
+        ),
+      },
+      { path: ROUTES.profile, element: <DashboardProfilePage /> },
     ],
   },
-])
+]);
 
 export function RouterProvider() {
-  return <ReactRouterProvider router={router} />
+  return <ReactRouterProvider router={router} />;
 }
