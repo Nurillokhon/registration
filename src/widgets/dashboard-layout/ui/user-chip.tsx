@@ -1,13 +1,6 @@
 import { UserRound } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import type { CurrentUser } from '@/entities/user'
-
-function getInitials(fullName: string) {
-  const parts = fullName.trim().split(/\s+/).filter(Boolean)
-  if (parts.length === 0) return null
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase()
-  return `${parts[0][0]}${parts[1][0]}`.toUpperCase()
-}
+import { getInitials, type CurrentUser } from '@/entities/user'
 
 type UserChipProps = {
   user: CurrentUser | null

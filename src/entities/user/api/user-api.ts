@@ -2,9 +2,32 @@ import { useEffect } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { clearTokens, getAccessToken, useGetRequest } from '@/shared/api'
 import { clearStoredUser, getStoredUser, setStoredUser } from '../model/user-storage'
-import type { CurrentUser, UserRole } from '../model/types'
+import type { CurrentUser, UserProfile, UserRole } from '../model/types'
 
 const PROFILE_ENDPOINT = '/account/user-profile/'
+
+/**
+ * Profil sahifasi uchun to'liq profil. useCurrentUser bilan bir xil so'rov
+ * kaliti ishlatiladi — kesh umumiy, topbar allaqachon yuklagan bo'lsa sahifa
+ * ochilganda qayta so'rov ketmaydi.
+ */
+export function useUserProfile() {
+  const hasToken = Boolean(getAccessToken())
+
+  const { data, isLoading, isFetching, refetch } = useGetRequest<UserProfile>({
+    url: PROFILE_ENDPOINT,
+    options: {
+      enabled: hasToken,
+    },
+  })
+
+  return {
+    profile: data,
+    isLoading: hasToken && isLoading,
+    isFetching,
+    refetch,
+  }
+}
 
 // Hozircha haqiqiy login ishlamaydi — token yo'q bo'lsa so'rov umuman
 // yuborilmaydi, buning o'rniga localStorage'dagi (agar bo'lsa) qiymat

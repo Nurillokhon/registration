@@ -265,6 +265,81 @@
       "forms": { "title": "Formalar ro'yxati" },
       "analytics": { "title": "Tahlil va Hisobotlar" },
       "profile": { "title": "Profil ma'lumotlari" }
+    },
+    "profile": {
+      "breadcrumb": {
+        "label": "Navigatsiya",
+        "home": "Bosh sahifa",
+        "current": "Foydalanuvchi profili"
+      },
+      "title": "Shaxsiy profil va ma'lumotlar",
+      "subtitle": "Yagona identifikatsiya tizimi (OneID) orqali sinxronlashtirilgan shaxsiy kabinet",
+      "status": "Holat: Tasdiqlangan (OneID)",
+      "refresh": "OneID bilan qayta yangilash",
+      "loadError": {
+        "title": "Profil ma'lumotlarini yuklab bo'lmadi",
+        "text": "Internet aloqasini tekshiring va qayta urinib ko'ring.",
+        "retry": "Qayta urinish"
+      },
+      "summary": {
+        "photoAlt": "Foydalanuvchi surati",
+        "verified": "Tasdiqlangan shaxs",
+        "phone": "Telefon raqami",
+        "birthDate": "Tug'ilgan sana",
+        "birthPlace": "Tug'ilgan joy",
+        "pnfl": "JShShIR",
+        "registryNote": "Shaxsiy guvohnoma elektron ma'lumotlari IIV axborot tizimlari orqali tasdiqlangan."
+      },
+      "tabs": {
+        "label": "Profil bo'limlari",
+        "personal": "Shaxsiy ma'lumotlar",
+        "security": "Xavfsizlik va parol",
+        "certificates": "Mening sertifikatlarim"
+      },
+      "gender": {
+        "male": "Erkak",
+        "female": "Ayol"
+      },
+      "personal": {
+        "title": "Fuqarolik ma'lumotlari",
+        "subtitle": "Yagona davlat reestridan import qilingan o'zgarmas ma'lumotlar",
+        "protected": "Himoyalangan reestr",
+        "fields": {
+          "firstName": "Ism",
+          "middleName": "Otasining ismi",
+          "lastName": "Familiya",
+          "nationality": "Millati",
+          "gender": "Jinsi",
+          "birthCountry": "Tug'ilgan davlat",
+          "passport": "Pasport seriya va raqami"
+        },
+        "noteTitle": "Muhim eslatma:",
+        "note": "Ushbu shaxsiy ma'lumotlar davlat axborot resurslari hamda <b>Yagona identifikatsiya tizimi (OneID)</b> orqali integratsiya qilingan bo'lib, to'g'ridan-to'g'ri o'zgartirish imkoniyati cheklangan. Agar ma'lumotlarda nomuvofiqlik aniqlansa, Davlat xizmatlari markaziga murojaat qilishingizni so'raymiz."
+      },
+      "security": {
+        "title": "Parolni o'zgartirish",
+        "subtitle": "Hisobingiz xavfsizligi uchun parolni vaqti-vaqti bilan yangilab turing",
+        "oldPassword": "Joriy parol",
+        "newPassword": "Yangi parol",
+        "confirmPassword": "Yangi parolni tasdiqlash",
+        "submit": "Parolni yangilash",
+        "success": "Parol muvaffaqiyatli o'zgartirildi.",
+        "errors": {
+          "required": "Bu maydonni to'ldiring",
+          "sameAsOld": "Yangi parol joriy paroldan farq qilishi kerak",
+          "mismatch": "Parollar mos kelmadi",
+          "apiFallback": "Parolni o'zgartirib bo'lmadi. Birozdan so'ng qayta urinib ko'ring."
+        }
+      },
+      "certificates": {
+        "title": "Sertifikatlar statistikasi",
+        "subtitle": "Platformaga yuklangan sertifikatlaringiz holati",
+        "total": "Jami sertifikatlar",
+        "new": "Yangi",
+        "approved": "Tasdiqlangan",
+        "problem": "Muammoli",
+        "viewAll": "Barcha sertifikatlarni ko'rish"
+      }
     }
   }
 }
