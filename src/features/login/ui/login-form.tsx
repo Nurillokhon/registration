@@ -1,10 +1,20 @@
-import { ArrowRight, KeyRound, Lock, Phone } from 'lucide-react'
+import { ArrowRight, KeyRound, LoaderCircle, Lock, Phone } from 'lucide-react'
 import { useState, type FormEventHandler } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router'
+import { setStoredUser } from '@/entities/user'
+import { getApiErrorMessage, setTokens } from '@/shared/api'
 import { ROUTES } from '@/shared/config'
-import { formatUzPhone } from '@/shared/lib/phone'
-import { Button, FormHeader, InfoNote, PasswordField, TextField } from '@/shared/ui'
+import { formatUzPhone, toApiPhone } from '@/shared/lib/phone'
+import {
+  Button,
+  FormAlert,
+  FormHeader,
+  InfoNote,
+  PasswordField,
+  TextField,
+} from '@/shared/ui'
+import { useLogin } from '../api'
 import {
   EMPTY_LOGIN_DATA,
   hasErrors,
@@ -16,24 +26,44 @@ import {
 export function LoginForm() {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const { login, isPending } = useLogin()
   const [values, setValues] = useState<LoginData>(EMPTY_LOGIN_DATA)
   const [errors, setErrors] = useState<LoginErrors>({})
+  const [apiError, setApiError] = useState<string | null>(null)
 
   const updateField = (field: keyof LoginData, value: string) => {
     setValues((prev) => ({ ...prev, [field]: value }))
     // Foydalanuvchi maydonni tuzata boshlashi bilan eski xato yashiriladi
     setErrors((prev) => ({ ...prev, [field]: undefined }))
+    setApiError(null)
   }
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault()
     const nextErrors = validateLogin(values)
     setErrors(nextErrors)
     if (hasErrors(nextErrors)) return
 
-    // TODO: backend tayyor bo'lganda shu yerda kirish so'rovi yuboriladi.
-    // Hozircha muvaffaqiyatli kirishdan keyingi yo'naltirish imitatsiya qilinadi.
-    navigate(ROUTES.home)
+    setApiError(null)
+    try {
+      const { access, refresh, user } = await login({
+        phone: toApiPhone(values.phone),
+        password: values.password,
+      })
+      setTokens({ access, refresh })
+      // Foydalanuvchi ham saqlanadi — dashboard sidebar'i rolni profil so'rovi
+      // kelguncha kutmasdan ko'rsatadi. O'qishda qiymat qayta tekshiriladi
+      // (entities/user/model/user-storage.ts), shuning uchun kutilmagan rol kelsa
+      // saqlangan qiymat shunchaki e'tiborsiz qoladi.
+      setStoredUser(user)
+      navigate(ROUTES.dashboard)
+    } catch (error) {
+      // Backend faol bo'lmagan (SMS tasdiqlanmagan) foydalanuvchiga ham aynan
+      // "Foydalanuvchi topilmadi yoki parol noto'g'ri!" deb javob beradi —
+      // kim ro'yxatdan o'tganini oshkor qilmaslik uchun. Shuning uchun xabar
+      // qanday kelsa, shundayligicha ko'rsatiladi.
+      setApiError(getApiErrorMessage(error, t('login.errors.apiFallback')))
+    }
   }
 
   return (
@@ -63,10 +93,26 @@ export function LoginForm() {
         />
       </div>
 
+      {apiError && <FormAlert className="mt-7">{apiError}</FormAlert>}
+
       <div className="mt-10">
-        <Button type="submit" variant="gradient" size="lg" className="w-full">
+        <Button
+          type="submit"
+          variant="gradient"
+          size="lg"
+          disabled={isPending}
+          className="w-full disabled:cursor-not-allowed disabled:opacity-70"
+        >
           {t('login.submit')}
-          <ArrowRight className="size-5 shrink-0" strokeWidth={2.4} aria-hidden="true" />
+          {isPending ? (
+            <LoaderCircle
+              className="size-5 shrink-0 animate-spin"
+              strokeWidth={2.4}
+              aria-hidden="true"
+            />
+          ) : (
+            <ArrowRight className="size-5 shrink-0" strokeWidth={2.4} aria-hidden="true" />
+          )}
         </Button>
         <p className="text-body mt-6 text-center text-[14px]">
           {t('login.noAccount')}{' '}

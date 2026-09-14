@@ -1,5 +1,6 @@
 export { Button, buttonVariants } from './button'
 export { Container } from './container'
+export { FormAlert } from './form-alert'
 export { FormHeader } from './form-header'
 export { InfoNote } from './info-note'
 export { LanguageSwitcher } from './language-switcher'

@@ -1,1 +1,1 @@
-export { formatUzPhone, isValidUzPhone } from './phone'
+export { formatUzPhone, isValidUzPhone, toApiPhone } from './phone'

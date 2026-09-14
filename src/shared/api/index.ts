@@ -1,4 +1,5 @@
 export { api } from './axios'
+export { getApiErrorMessage, getApiPayloadStatus, getHttpStatus } from './api-error'
 export {
   useGetRequest,
   useLazyGetRequest,

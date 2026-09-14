@@ -97,7 +97,8 @@
     "securityNote": "Parolingizni hech kimga bermang. Platforma xodimlari sizdan hech qachon parol so'ramaydi.",
     "errors": {
       "required": "Bu maydonni to'ldiring",
-      "phone": "Telefon raqamini to'liq kiriting"
+      "phone": "Telefon raqamini to'liq kiriting",
+      "apiFallback": "Kirishda xatolik yuz berdi. Birozdan so'ng qayta urinib ko'ring."
     }
   },
   "register": {
@@ -128,10 +129,9 @@
     },
     "account": {
       "title": "Hisob ma'lumotlari",
-      "subtitle": "Profilingiz uchun login va xavfsiz parol o'rnating",
-      "login": {
-        "label": "Email yoki telefon raqami",
-        "placeholder": "+998 90 123 45 67 yoki email"
+      "subtitle": "Telefon raqamingizni kiriting va parol o'rnating",
+      "phone": {
+        "label": "Telefon raqami"
       },
       "password": {
         "label": "Yangi parol"
@@ -141,8 +141,8 @@
       },
       "requirements": {
         "title": "Parol talablari:",
-        "minLength": "Kamida 8 ta belgi",
-        "upperAndDigit": "Katta harf va raqam",
+        "minLength": "Kamida 5 ta belgi",
+        "notOnlyDigits": "Faqat raqamlardan iborat bo'lmasin",
         "met": "bajarildi",
         "notMet": "bajarilmagan"
       },
@@ -151,14 +151,11 @@
     },
     "verify": {
       "title": "Tasdiqlash kodi",
-      "subtitle": "{{target}} ga yuborilgan 6 xonali kodni kiriting",
+      "subtitle": "{{target}} raqamiga yuborilgan 6 xonali kodni kiriting",
       "codeLabel": "Tasdiqlash kodi",
       "digitLabel": "{{index}}-raqam",
-      "noCode": "Kod kelmadimi?",
-      "resend": "Qayta yuborish",
-      "resent": "Kod qayta yuborildi",
       "submit": "Tasdiqlash va yakunlash",
-      "securityNote": "Kod 5 daqiqa davomida amal qiladi. Uni hech kimga, hatto platforma xodimlariga ham bermang."
+      "securityNote": "Kod 3 daqiqa davomida amal qiladi va 5 martagacha xato kiritishga ruxsat beriladi. Uni hech kimga, hatto platforma xodimlariga ham bermang."
     },
     "success": {
       "title": "Tabriklaymiz!",
@@ -170,10 +167,11 @@
       "pinfl": "JShShIR 14 ta raqamdan iborat bo'lishi kerak",
       "passportSeries": "2 ta lotin harfi",
       "passportNumber": "7 ta raqam kiriting",
-      "login": "Email yoki telefon raqamini to'g'ri kiriting",
+      "phone": "Telefon raqamini to'liq kiriting",
       "passwordWeak": "Parol talablarga javob bermaydi",
       "passwordMismatch": "Parollar mos kelmadi",
-      "code": "6 xonali kodni to'liq kiriting"
+      "code": "6 xonali kodni to'liq kiriting",
+      "apiFallback": "Xatolik yuz berdi. Birozdan so'ng qayta urinib ko'ring."
     }
   },
   "footer": {
@@ -211,6 +209,62 @@
       "light": "Yorug' rejim",
       "dark": "Qorong'i rejim",
       "system": "Tizim rejimi"
+    }
+  },
+  "dashboard": {
+    "brand": {
+      "badge": "PRO",
+      "subtitle": "Ilmiy-O'quv Markazi"
+    },
+    "roleBadge": {
+      "label": "Boshqaruv Holati:",
+      "unknown": "—",
+      "roles": {
+        "admin": "ADMIN",
+        "expert": "EKSPERT",
+        "candidate": "NOMZOD"
+      }
+    },
+    "nav": {
+      "sections": {
+        "main": "ASOSIY BO'LIMLAR",
+        "settings": "TAHLIL & SOZLAMALAR"
+      },
+      "items": {
+        "dashboard": "Dashboard",
+        "certificates": "Mening sertifikatlarim",
+        "newApplication": "Yangi ariza",
+        "applications": "Arizalar",
+        "reviews": "Tekshiruv tarixi",
+        "experts": "Ekspertlar",
+        "forms": "Formalar ro'yxati",
+        "analytics": "Tahlil va Hisobotlar",
+        "profile": "Profil ma'lumotlari"
+      }
+    },
+    "footer": {
+      "serverStatus": "Server: Faol",
+      "logout": "Tizimdan chiqish"
+    },
+    "topbar": {
+      "searchPlaceholder": "Qidiruv...",
+      "notifications": "Bildirishnomalar",
+      "openMenu": "Menyuni ochish",
+      "closeMenu": "Menyuni yopish",
+      "anonymousName": "Mehmon",
+      "anonymousPhone": "Tizimga kirilmagan"
+    },
+    "pages": {
+      "comingSoon": "Tez orada",
+      "index": { "title": "Dashboard" },
+      "certificates": { "title": "Mening sertifikatlarim" },
+      "newApplication": { "title": "Yangi ariza" },
+      "applications": { "title": "Arizalar" },
+      "reviews": { "title": "Tekshiruv tarixi" },
+      "experts": { "title": "Ekspertlar" },
+      "forms": { "title": "Formalar ro'yxati" },
+      "analytics": { "title": "Tahlil va Hisobotlar" },
+      "profile": { "title": "Profil ma'lumotlari" }
     }
   }
 }

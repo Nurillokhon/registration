@@ -1,3 +1,4 @@
+import { isValidUzPhone } from '@/shared/lib/phone'
 import { CODE_LENGTH, type AccountData, type PersonalData } from './registration'
 
 // Xato matni emas, tarjima kaliti qaytariladi — matn render paytida t() bilan
@@ -7,7 +8,7 @@ export type ErrorKey =
   | 'register.errors.pinfl'
   | 'register.errors.passportSeries'
   | 'register.errors.passportNumber'
-  | 'register.errors.login'
+  | 'register.errors.phone'
   | 'register.errors.passwordWeak'
   | 'register.errors.passwordMismatch'
   | 'register.errors.code'
@@ -17,21 +18,21 @@ export type FieldErrors<T> = Partial<Record<keyof T, ErrorKey>>
 const PINFL_PATTERN = /^\d{14}$/
 const PASSPORT_SERIES_PATTERN = /^[A-Z]{2}$/
 const PASSPORT_NUMBER_PATTERN = /^\d{7}$/
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-// 998 kodi bilan yoki usiz 9 xonali raqam (bo'shliq, tire, qavslar olib tashlangandan keyin)
-const UZ_PHONE_PATTERN = /^(\+?998)?\d{9}$/
-const PHONE_SEPARATORS = /[\s()-]/g
+const ONLY_DIGITS_PATTERN = /^\d+$/
 
+// Backend talabi (POST /account/user-register/): kamida 5 belgi va faqat
+// raqamlardan iborat bo'lmasin. Talablar ro'yxati foydalanuvchiga shu
+// qoidalarni ko'rsatadi, shuning uchun ikkalasi bitta manbadan olinadi.
 export const PASSWORD_RULES = [
   {
     id: 'minLength',
     labelKey: 'register.account.requirements.minLength',
-    test: (password: string) => password.length >= 8,
+    test: (password: string) => password.length >= 5,
   },
   {
-    id: 'upperAndDigit',
-    labelKey: 'register.account.requirements.upperAndDigit',
-    test: (password: string) => /\p{Lu}/u.test(password) && /\d/.test(password),
+    id: 'notOnlyDigits',
+    labelKey: 'register.account.requirements.notOnlyDigits',
+    test: (password: string) => password.length > 0 && !ONLY_DIGITS_PATTERN.test(password),
   },
 ] as const
 
@@ -44,13 +45,9 @@ function validatePattern(value: string, pattern: RegExp, errorKey: ErrorKey) {
   return pattern.test(value) ? undefined : errorKey
 }
 
-function validateLogin(login: string): ErrorKey | undefined {
-  const value = login.trim()
-  if (!value) return 'register.errors.required'
-
-  const isEmail = EMAIL_PATTERN.test(value)
-  const isPhone = UZ_PHONE_PATTERN.test(value.replace(PHONE_SEPARATORS, ''))
-  return isEmail || isPhone ? undefined : 'register.errors.login'
+function validatePhone(phone: string): ErrorKey | undefined {
+  if (!phone) return 'register.errors.required'
+  return isValidUzPhone(phone) ? undefined : 'register.errors.phone'
 }
 
 function validatePassword(password: string): ErrorKey | undefined {
@@ -82,7 +79,7 @@ export function validatePersonal(data: PersonalData): FieldErrors<PersonalData> 
 
 export function validateAccount(data: AccountData): FieldErrors<AccountData> {
   return {
-    login: validateLogin(data.login),
+    phone: validatePhone(data.phone),
     password: validatePassword(data.password),
     confirmPassword: validateConfirmPassword(data.confirmPassword, data.password),
   }

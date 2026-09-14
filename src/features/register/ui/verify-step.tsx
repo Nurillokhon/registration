@@ -1,83 +1,102 @@
-import { MailCheck } from 'lucide-react'
-import { useId, useState, type FormEventHandler } from 'react'
-import { useTranslation } from 'react-i18next'
-import { FormHeader, InfoNote } from '@/shared/ui'
-import { createEmptyCode } from '../model/registration'
-import { validateCode, type ErrorKey } from '../model/validation'
-import { CodeInput } from './code-input'
-import { BackButton, SubmitButton } from './step-actions'
+/** @format */
+
+import { MailCheck } from "lucide-react";
+import { useId, useState, type FormEventHandler } from "react";
+import { useTranslation } from "react-i18next";
+import { setStoredUser } from "@/entities/user";
+import { getApiErrorMessage, setTokens } from "@/shared/api";
+import { toApiPhone } from "@/shared/lib/phone";
+import { FormAlert, FormHeader, InfoNote } from "@/shared/ui";
+import { useSmsVerify } from "../api";
+import { createEmptyCode } from "../model/registration";
+import { validateCode, type ErrorKey } from "../model/validation";
+import { CodeInput } from "./code-input";
+import { BackButton, SubmitButton } from "./step-actions";
+import { useNavigate } from "react-router";
+import { ROUTES } from "@/shared/config";
 
 type VerifyStepProps = {
-  /** Kod yuborilgan email yoki telefon raqami */
-  target: string
-  onSubmit: () => void
-  onBack: () => void
-}
+  /** Kod yuborilgan telefon raqami ("+998 90 123 45 67" ko'rinishida) */
+  phone: string;
+  onSubmit: () => void;
+  onBack: () => void;
+};
 
-export function VerifyStep({ target, onSubmit, onBack }: VerifyStepProps) {
-  const { t } = useTranslation()
-  const errorId = useId()
-  const [code, setCode] = useState(createEmptyCode)
-  const [error, setError] = useState<ErrorKey>()
-  const [isCodeResent, setIsCodeResent] = useState(false)
+export function VerifyStep({ phone, onBack }: VerifyStepProps) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { verifySms, isPending } = useSmsVerify();
+  const errorId = useId();
+  const [code, setCode] = useState(createEmptyCode);
+  const [codeError, setCodeError] = useState<ErrorKey>();
+  const [apiError, setApiError] = useState<string | null>(null);
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault()
-    const nextError = validateCode(code)
-    setError(nextError)
-    if (!nextError) onSubmit()
-  }
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault();
+    const nextError = validateCode(code);
+    setCodeError(nextError);
+    if (nextError) return;
+
+    setApiError(null);
+    try {
+      const { access, refresh, user } = await verifySms({
+        phone: toApiPhone(phone),
+        code: code.join(""),
+      });
+      // Kod to'g'ri bo'lsa foydalanuvchi darhol tizimga kirgan hisoblanadi
+      setTokens({ access, refresh });
+      // Login bilan bir xil: foydalanuvchi ham saqlanadi, shunda dashboard
+      // rolni profil so'rovi kelguncha kutmasdan biladi.
+      setStoredUser(user);
+      navigate(ROUTES.dashboard);
+      // onSubmit()
+    } catch (error) {
+      // Backend qolgan urinishlar sonini xabarda qaytaradi
+      // ("SMS kod noto'g'ri! Qolgan urinishlar: 4"), 429 esa — urinishlar tugadi
+      setApiError(getApiErrorMessage(error, t("register.errors.apiFallback")));
+    }
+  };
 
   return (
     <form noValidate onSubmit={handleSubmit}>
       <FormHeader
-        title={t('register.verify.title')}
-        subtitle={t('register.verify.subtitle', { target })}
+        title={t("register.verify.title")}
+        subtitle={t("register.verify.subtitle", { target: phone })}
       />
 
       <div className="mt-10">
         <CodeInput
-          label={t('register.verify.codeLabel')}
+          label={t("register.verify.codeLabel")}
           value={code}
-          isInvalid={Boolean(error)}
-          describedBy={error ? errorId : undefined}
+          isInvalid={Boolean(codeError) || Boolean(apiError)}
+          describedBy={codeError ? errorId : undefined}
           onChange={(nextCode) => {
-            setCode(nextCode)
-            setError(undefined)
+            setCode(nextCode);
+            setCodeError(undefined);
+            setApiError(null);
           }}
         />
-        {error && (
-          <p id={errorId} className="text-danger mt-3 text-center text-[12px] font-medium">
-            {t(error)}
+        {codeError && (
+          <p
+            id={errorId}
+            className="text-danger mt-3 text-center text-[12px] font-medium"
+          >
+            {t(codeError)}
           </p>
         )}
-
-        <p className="text-body mt-5 text-center text-[14px]" aria-live="polite">
-          {isCodeResent ? (
-            t('register.verify.resent')
-          ) : (
-            <>
-              {t('register.verify.noCode')}{' '}
-              <button
-                type="button"
-                onClick={() => setIsCodeResent(true)}
-                className="text-primary font-semibold hover:underline"
-              >
-                {t('register.verify.resend')}
-              </button>
-            </>
-          )}
-        </p>
+        {apiError && <FormAlert className="mt-4">{apiError}</FormAlert>}
       </div>
 
       <div className="mt-10">
-        <SubmitButton>{t('register.verify.submit')}</SubmitButton>
+        <SubmitButton isPending={isPending}>
+          {t("register.verify.submit")}
+        </SubmitButton>
         <BackButton onClick={onBack} />
       </div>
 
       <InfoNote icon={MailCheck} className="mt-10 sm:mt-12">
-        {t('register.verify.securityNote')}
+        {t("register.verify.securityNote")}
       </InfoNote>
     </form>
-  )
+  );
 }

@@ -6,8 +6,8 @@ export type PersonalData = {
 }
 
 export type AccountData = {
-  /** Email yoki telefon raqami */
-  login: string
+  /** "+998 90 123 45 67" ko'rinishida; API'ga bo'shliqsiz yuboriladi */
+  phone: string
   password: string
   confirmPassword: string
 }
@@ -19,7 +19,7 @@ export const EMPTY_PERSONAL_DATA: PersonalData = {
 }
 
 export const EMPTY_ACCOUNT_DATA: AccountData = {
-  login: '',
+  phone: '',
   password: '',
   confirmPassword: '',
 }
@@ -28,4 +28,9 @@ export const CODE_LENGTH = 6
 
 export function createEmptyCode() {
   return Array.from({ length: CODE_LENGTH }, () => '')
+}
+
+/** Seriya va raqam API uchun bitta satrga birlashtiriladi: AE + 2538891 → "AE2538891". */
+export function toPassportNumber({ passportSeries, passportNumber }: PersonalData) {
+  return `${passportSeries}${passportNumber}`
 }

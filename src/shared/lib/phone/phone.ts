@@ -36,3 +36,12 @@ export function formatUzPhone(value: string) {
 export function isValidUzPhone(value: string) {
   return extractLocalDigits(value).length === LOCAL_NUMBER_LENGTH
 }
+
+/**
+ * Backend kutadigan ko'rinish: "+998901234567" — bo'shliqsiz.
+ * Raqam to'liq bo'lmasa bo'sh satr qaytaradi (validatsiya buni ushlab qoladi).
+ */
+export function toApiPhone(value: string) {
+  const localDigits = extractLocalDigits(value)
+  return localDigits.length === LOCAL_NUMBER_LENGTH ? `${COUNTRY_PREFIX}${localDigits}` : ''
+}

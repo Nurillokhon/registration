@@ -26,7 +26,7 @@ export function SiteHeader() {
           className="text-heading shrink-0 text-[15px] font-extrabold tracking-tight whitespace-nowrap sm:text-[17px]"
         >
           {/* Brend nomi — tarjima qilinmaydi */}
-          Digital Archivist
+          SERTIFIKAT
         </Link>
 
         <nav className="flex items-center gap-1 sm:gap-2">

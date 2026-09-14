@@ -7,6 +7,11 @@ export const API_URL = import.meta.env.VITE_API_URL ?? 'https://api.ilmiymarkaz.
 export const ACCESS_TOKEN_STORAGE_KEY = 'access_token'
 export const REFRESH_TOKEN_STORAGE_KEY = 'refresh_token'
 
+// Joriy foydalanuvchi (role bilan birga) shu kalit ostida saqlanadi — backend
+// ishlamasa ham UI darhol ko'rsatish uchun va rol asosidagi dashboard'ni
+// dasturchi konsoldan qo'lda sinab ko'rishi uchun.
+export const USER_STORAGE_KEY = 'auth_user'
+
 // Qo'llab-quvvatlanadigan tillar. Tartib muhim emas, lekin birinchisi standart bo'lishi shart emas —
 // standart til alohida DEFAULT_LANGUAGE orqali belgilanadi.
 export const SUPPORTED_LANGUAGES = ['uz', 'ru'] as const
