@@ -464,6 +464,39 @@
         "retry": "Qayta urinish"
       }
     },
+    "expertDashboard": {
+      "subtitle": "Tekshiruv faoliyatingiz bo'yicha ko'rsatkichlar",
+      "greeting": "Xush kelibsiz, {{name}}! Tekshiruv faoliyatingiz bo'yicha ko'rsatkichlar",
+      "pending": {
+        "title": "Tekshiruvni kutayotgan arizalar",
+        "text": "Sizning tillaringiz va sertifikat turlaringiz bo'yicha navbatdagi arizalar",
+        "empty": "Hozircha navbatda ariza yo'q",
+        "start": "Tekshirishni boshlash",
+        "viewAll": "Barcha arizalar"
+      },
+      "stats": {
+        "reviewed": "Jami tekshirilgan",
+        "approved": "Tasdiqlangan",
+        "rejected": "Rad etilgan",
+        "problem": "Muammoli",
+        "share": "Tekshirilganlarning {{percent}}%"
+      },
+      "directions": {
+        "title": "Mening yo'nalishlarim",
+        "subtitle": "Siz tekshiradigan tillar va sertifikat turlari",
+        "languages": "Tillar",
+        "types": "Sertifikat turlari"
+      },
+      "loadError": {
+        "title": "Ko'rsatkichlarni yuklab bo'lmadi",
+        "text": "Internet aloqasini tekshiring va qayta urinib ko'ring.",
+        "retry": "Qayta urinish"
+      },
+      "empty": {
+        "title": "Ko'rsatkichlar topilmadi",
+        "text": "Hisobingiz uchun statistika hali shakllanmagan."
+      }
+    },
     "review": {
       "title": "Sertifikat #{{number}}",
       "queue": {
