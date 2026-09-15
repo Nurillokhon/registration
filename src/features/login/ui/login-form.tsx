@@ -2,7 +2,7 @@ import { ArrowRight, KeyRound, LoaderCircle, Lock, Phone } from 'lucide-react'
 import { useState, type FormEventHandler } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router'
-import { isUserRole, setStoredUser } from '@/entities/user'
+import { getRoleHomeRoute, isUserRole, setStoredUser } from '@/entities/user'
 import { getApiErrorMessage, setTokens } from '@/shared/api'
 import { ROUTES } from '@/shared/config'
 import { formatUzPhone, toApiPhone } from '@/shared/lib/phone'
@@ -60,7 +60,8 @@ export function LoginForm() {
       // Foydalanuvchi ham saqlanadi — dashboard sidebar'i rolni profil so'rovi
       // kelguncha kutmasdan ko'rsatadi.
       setStoredUser(user)
-      navigate(ROUTES.dashboard)
+      // Rolga ruxsat berilgan sahifaga o'tiladi (candidate'da /dashboard yo'q)
+      navigate(getRoleHomeRoute(user.role), { replace: true })
     } catch (error) {
       // Backend faol bo'lmagan (SMS tasdiqlanmagan) foydalanuvchiga ham aynan
       // "Foydalanuvchi topilmadi yoki parol noto'g'ri!" deb javob beradi —

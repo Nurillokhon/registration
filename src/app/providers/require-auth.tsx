@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Navigate } from 'react-router'
-import { useCurrentUser, type UserRole } from '@/entities/user'
+import { getRoleHomeRoute, useCurrentUser, type UserRole } from '@/entities/user'
 import { ROUTES } from '@/shared/config'
 
 type RequireAuthProps = {
@@ -25,8 +25,9 @@ export function RequireAuth({ roles, children }: RequireAuthProps) {
     return <Navigate to={ROUTES.login} replace />
   }
 
-  // /dashboard barcha rollarga ochiq, shuning uchun bu yo'naltirish halqaga aylanmaydi
-  if (roles && !roles.includes(role)) return <Navigate to={ROUTES.dashboard} replace />
+  // Rolning bosh sahifasi har doim o'sha rolga ochiq, shuning uchun bu
+  // yo'naltirish halqaga aylanmaydi
+  if (roles && !roles.includes(role)) return <Navigate to={getRoleHomeRoute(role)} replace />
 
   return children
 }

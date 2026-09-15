@@ -26,8 +26,8 @@ import { RequireAuth } from "./require-auth";
 
 // Kabinet sahifalari bitta yo'lsiz (pathless) layout ostida: tashqi RequireAuth
 // faqat kirganlikni tekshiradi, sahifadagi RequireAuth esa rolni — ruxsat
-// berilmagan rol /dashboard'ga qaytariladi. `roles` berilmagan sahifa
-// (bosh sahifa, profil) barcha rollar uchun ochiq.
+// berilmagan rol o'z bosh sahifasiga (entities/user getRoleHomeRoute) qaytariladi.
+// `roles` berilmagan sahifa (profil) barcha rollar uchun ochiq.
 // Ruxsatlar sidebar menyusi (widgets/dashboard-layout/model/menu.ts) bilan mos bo'lishi kerak.
 const router = createBrowserRouter([
   { path: ROUTES.home, element: <HomePage /> },
@@ -40,7 +40,14 @@ const router = createBrowserRouter([
       </RequireAuth>
     ),
     children: [
-      { path: ROUTES.dashboard, element: <DashboardIndexPage /> },
+      {
+        path: ROUTES.dashboard,
+        element: (
+          <RequireAuth roles={["expert", "admin"]}>
+            <DashboardIndexPage />
+          </RequireAuth>
+        ),
+      },
       {
         path: ROUTES.certificates,
         element: (

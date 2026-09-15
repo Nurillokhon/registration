@@ -3,7 +3,7 @@
 import { MailCheck } from "lucide-react";
 import { useId, useState, type FormEventHandler } from "react";
 import { useTranslation } from "react-i18next";
-import { isUserRole, setStoredUser } from "@/entities/user";
+import { getRoleHomeRoute, isUserRole, setStoredUser } from "@/entities/user";
 import { getApiErrorMessage, setTokens } from "@/shared/api";
 import { toApiPhone } from "@/shared/lib/phone";
 import { FormAlert, FormHeader, InfoNote } from "@/shared/ui";
@@ -13,7 +13,6 @@ import { validateCode, type ErrorKey } from "../model/validation";
 import { CodeInput } from "./code-input";
 import { BackButton, SubmitButton } from "./step-actions";
 import { useNavigate } from "react-router";
-import { ROUTES } from "@/shared/config";
 
 type VerifyStepProps = {
   /** Kod yuborilgan telefon raqami ("+998 90 123 45 67" ko'rinishida) */
@@ -53,7 +52,8 @@ export function VerifyStep({ phone, onBack }: VerifyStepProps) {
       // Foydalanuvchi ham saqlanadi, shunda dashboard rolni profil so'rovi
       // kelguncha kutmasdan biladi.
       setStoredUser(user);
-      navigate(ROUTES.dashboard);
+      // Rolga ruxsat berilgan sahifaga o'tiladi (candidate'da /dashboard yo'q)
+      navigate(getRoleHomeRoute(user.role), { replace: true });
       // onSubmit()
     } catch (error) {
       // Backend qolgan urinishlar sonini xabarda qaytaradi
