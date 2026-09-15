@@ -5,7 +5,8 @@ import { findSchemaForType, parseFormSchemaFields } from '../model/form-schema'
 
 type ExtraDataListProps = {
   title: string
-  extraData: string | null | undefined
+  /** JSON satr yoki ballar massivi — parseExtraData() ikkalasini ham o'qiydi */
+  extraData: unknown
   typeId: number | null
 }
 

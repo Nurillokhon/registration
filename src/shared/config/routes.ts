@@ -15,8 +15,13 @@ export const ROUTES = {
   certificateEdit: "/certificates/:id/edit",
   newApplication: "/applications/new",
   applications: "/applications",
+  // "/applications/new" (statik) bu yo'ldan ustun turadi — react-router statik segmentni afzal ko'radi
+  applicationDetail: "/applications/:id",
+  applicationEdit: "/applications/:id/edit",
   reviews: "/reviews",
   experts: "/experts",
+  expertDetail: "/experts/:id",
+  expertCertificate: "/experts/:expertId/certificates/:id",
   forms: "/forms",
   analytics: "/analytics",
   profile: "/profile",

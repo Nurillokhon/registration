@@ -9,9 +9,11 @@ import { CertificateForm } from './certificate-form'
 type EditCertificateFormProps = {
   certificate: CertificateDetail
   onUpdated: () => void
+  /** "Bekor qilish" manzili — berilmasa nomzodning sertifikat sahifasi */
+  cancelTo?: string
 }
 
-export function EditCertificateForm({ certificate, onUpdated }: EditCertificateFormProps) {
+export function EditCertificateForm({ certificate, onUpdated, cancelTo }: EditCertificateFormProps) {
   const { t } = useTranslation()
   const { updateCertificate, isPending } = useUpdateCertificate(certificate.id)
 
@@ -21,7 +23,7 @@ export function EditCertificateForm({ certificate, onUpdated }: EditCertificateF
       defaultValues={toCertificateFormValues(certificate)}
       currentFileUrl={getCertificateFileUrl(certificate.file)}
       submitLabel={t('dashboard.certificateForm.submitEdit')}
-      cancelTo={generatePath(ROUTES.certificateDetail, { id: String(certificate.id) })}
+      cancelTo={cancelTo ?? generatePath(ROUTES.certificateDetail, { id: String(certificate.id) })}
       isPending={isPending}
       onSubmit={async (data) => {
         await updateCertificate(data)

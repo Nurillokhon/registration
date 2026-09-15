@@ -3,7 +3,9 @@ export type {
   CertificateDetail,
   CertificateHistoryItem,
   CertificateListItem,
+  CertificateScore,
   CertificatesParams,
+  CertificateStatusFilter,
 } from './model/types'
 export {
   canEditCertificate,
@@ -18,6 +20,7 @@ export {
   getCertificateEndpoint,
   invalidateCertificateQueries,
   useCertificate,
+  useCertificateFile,
   useCertificateHistory,
   useCertificates,
 } from './api/certificate-api'

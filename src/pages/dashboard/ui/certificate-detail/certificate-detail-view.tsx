@@ -1,8 +1,7 @@
-import { CreditCard, ExternalLink, FileText, Info, Pencil, TriangleAlert } from 'lucide-react'
+import { ExternalLink, FileText, Info, TriangleAlert } from 'lucide-react'
+import type { ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
-import { generatePath, Link } from 'react-router'
 import {
-  canEditCertificate,
   CertificatePaymentBadge,
   CertificateStatusBadge,
   getCertificateFileUrl,
@@ -11,11 +10,11 @@ import {
   type CertificateDetail,
 } from '@/entities/certificate'
 import { ExtraDataList } from '@/features/certificate-form'
-import { ROUTES } from '@/shared/config'
 import { cn } from '@/shared/lib/cn'
 import { formatAmount, formatApiDate } from '@/shared/lib/format'
 import { buttonVariants } from '@/shared/ui'
 import { DashboardPageHeader } from '../dashboard-page-header'
+import { CertificateCandidateCard } from './certificate-candidate-card'
 import { CertificateHistory } from './certificate-history'
 
 type DetailRow = {
@@ -24,7 +23,22 @@ type DetailRow = {
   value: string | null | undefined
 }
 
-export function CertificateDetailView({ certificate }: { certificate: CertificateDetail }) {
+type CertificateDetailViewProps = {
+  certificate: CertificateDetail
+  /** Nomzod sahifasida — sertifikatlar ro'yxati, admin sahifasida — ekspert sahifasi */
+  back: { to: string; label: string }
+  /** Sarlavha yonidagi tugmalar (nomzod uchun tahrirlash/to'lash) */
+  actions?: ReactNode
+  /** Admin uchun — nomzod ma'lumotlari kartochkasi ko'rsatiladi */
+  showCandidate?: boolean
+}
+
+export function CertificateDetailView({
+  certificate,
+  back,
+  actions,
+  showCandidate = false,
+}: CertificateDetailViewProps) {
   const { t } = useTranslation()
   const isPaid = isCertificatePaid(certificate)
   const fileUrl = getCertificateFileUrl(certificate.file)
@@ -89,26 +103,8 @@ export function CertificateDetailView({ certificate }: { certificate: Certificat
     <div className="mx-auto max-w-7xl">
       <DashboardPageHeader
         title={t('dashboard.certificates.detail.title', { number: certificate.number })}
-        back={{ to: ROUTES.certificates, label: t('dashboard.certificates.detail.back') }}
-        actions={
-          <>
-            {canEditCertificate(certificate) && (
-              <Link
-                to={generatePath(ROUTES.certificateEdit, { id: String(certificate.id) })}
-                className={buttonVariants({ variant: 'soft' })}
-              >
-                <Pencil className="size-4 shrink-0" strokeWidth={2.4} aria-hidden="true" />
-                {t('dashboard.certificates.detail.edit')}
-              </Link>
-            )}
-            {!isPaid && certificate.pay_url && (
-              <a href={certificate.pay_url} className={buttonVariants()}>
-                <CreditCard className="size-4 shrink-0" strokeWidth={2.4} aria-hidden="true" />
-                {t('dashboard.certificates.detail.pay')}
-              </a>
-            )}
-          </>
-        }
+        back={back}
+        actions={actions}
       />
 
       <div className="mt-8 grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] xl:gap-8">
@@ -172,7 +168,10 @@ export function CertificateDetailView({ certificate }: { certificate: Certificat
           />
         </div>
 
-        <CertificateHistory certificateId={certificate.id} />
+        <div className="min-w-0 space-y-6">
+          {showCandidate && <CertificateCandidateCard certificate={certificate} />}
+          <CertificateHistory certificateId={certificate.id} />
+        </div>
       </div>
     </div>
   )

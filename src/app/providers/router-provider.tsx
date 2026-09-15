@@ -6,16 +6,19 @@ import {
 } from "react-router";
 import {
   DashboardAnalyticsPage,
+  DashboardApplicationDetailPage,
+  DashboardApplicationEditPage,
   DashboardApplicationsPage,
   DashboardCertificateDetailPage,
   DashboardCertificateEditPage,
   DashboardCertificatesPage,
+  DashboardExpertCertificatePage,
+  DashboardExpertDetailPage,
   DashboardExpertsPage,
   DashboardFormsPage,
   DashboardIndexPage,
   DashboardNewApplicationPage,
   DashboardProfilePage,
-  DashboardReviewsPage,
 } from "@/pages/dashboard";
 import { HomePage } from "@/pages/home";
 import { LoginPage } from "@/pages/login";
@@ -89,10 +92,18 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: ROUTES.reviews,
+        path: ROUTES.applicationDetail,
         element: (
-          <RequireAuth roles={["expert"]}>
-            <DashboardReviewsPage />
+          <RequireAuth roles={["expert", "admin"]}>
+            <DashboardApplicationDetailPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: ROUTES.applicationEdit,
+        element: (
+          <RequireAuth roles={["expert", "admin"]}>
+            <DashboardApplicationEditPage />
           </RequireAuth>
         ),
       },
@@ -101,6 +112,22 @@ const router = createBrowserRouter([
         element: (
           <RequireAuth roles={["admin"]}>
             <DashboardExpertsPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: ROUTES.expertDetail,
+        element: (
+          <RequireAuth roles={["admin"]}>
+            <DashboardExpertDetailPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: ROUTES.expertCertificate,
+        element: (
+          <RequireAuth roles={["admin"]}>
+            <DashboardExpertCertificatePage />
           </RequireAuth>
         ),
       },

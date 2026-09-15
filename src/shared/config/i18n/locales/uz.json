@@ -368,6 +368,8 @@
       "status": {
         "new": "Yangi",
         "problem": "Muammoli",
+        "approved": "Tasdiqlangan",
+        "rejected": "Rad etilgan",
         "unknown": "Noma'lum"
       },
       "empty": {
@@ -417,6 +419,165 @@
         },
         "editTitle": "Sertifikatni tahrirlash",
         "editSubtitle": "Faqat «Yangi» yoki «Muammoli» holatdagi sertifikatni tahrirlash mumkin"
+      }
+    },
+    "experts": {
+      "subtitle": "Ekspertlar va ular tekshirgan sertifikatlar ko'rsatkichlari",
+      "searchLabel": "Ekspertlarni qidirish",
+      "searchPlaceholder": "Ism, telefon, pasport, til yoki tur bo'yicha",
+      "count": "Jami: {{count}}",
+      "columns": {
+        "expert": "Ekspert",
+        "documents": "Pasport / JSHSHIR",
+        "languages": "Tillar",
+        "types": "Turlar",
+        "total": "Jami",
+        "approved": "Tasdiqlangan",
+        "rejected": "Rad etilgan",
+        "problem": "Muammoli",
+        "pending": "Kutilmoqda",
+        "actions": "Amallar"
+      },
+      "view": "Ko'rish",
+      "detail": {
+        "back": "Ekspertlarga qaytish",
+        "fallbackTitle": "Ekspert",
+        "notFound": {
+          "title": "Ekspert topilmadi",
+          "text": "Ekspert mavjud emas yoki ro'yxatdan o'chirilgan."
+        }
+      },
+      "certificate": {
+        "back": "Ekspert sahifasiga qaytish"
+      },
+      "empty": {
+        "title": "Hozircha ekspert yo'q",
+        "text": "Tizimga ekspertlar qo'shilganda ular shu yerda ko'rinadi."
+      },
+      "noResults": {
+        "title": "Hech narsa topilmadi",
+        "text": "Qidiruv so'zini o'zgartirib ko'ring."
+      },
+      "loadError": {
+        "title": "Ekspertlar ro'yxatini yuklab bo'lmadi",
+        "text": "Internet aloqasini tekshiring va qayta urinib ko'ring.",
+        "retry": "Qayta urinish"
+      }
+    },
+    "review": {
+      "title": "Sertifikat #{{number}}",
+      "queue": {
+        "previous": "Oldingi",
+        "next": "Keyingi",
+        "backToList": "Ro'yxatga qaytish",
+        "reviewed": "Tekshirilgan",
+        "remaining": "Qolgan",
+        "empty": "Navbatda boshqa ariza yo'q.",
+        "error": "Navbatdagi arizani yuklab bo'lmadi. Qayta urinib ko'ring."
+      },
+      "steps": {
+        "label": "Tekshirish bosqichlari",
+        "awaitingPayment": "To'lovni kutish",
+        "accepted": "Qabul qilingan",
+        "setStatus": "Statusni belgilang"
+      },
+      "actions": {
+        "title": "Tekshirish holati",
+        "autoMode": "Avtomatik rejim",
+        "autoModeOn": "Yoqilgan",
+        "autoNext": "Status qo'yilgach navbatdagi arizaga avtomatik o'tish",
+        "approve": "Sertifikatni tasdiqlash",
+        "reject": "Sertifikatni rad etish",
+        "problem": "Muammoni belgilash",
+        "confirmApprove": "Sertifikat tasdiqlanadi va unga ma'lumotnoma yaratiladi.",
+        "confirmReject": "Ariza rad etiladi — nomzodga tanlangan sabab SMS orqali yuboriladi.",
+        "confirmProblem": "Arizada muammo belgilanadi — nomzod tuzatib, qayta yuborishi mumkin.",
+        "reason": "Sabab",
+        "reasonPlaceholder": "Sababni tanlang",
+        "reasonRequired": "Sababni tanlang.",
+        "confirm": "Tasdiqlash",
+        "cancel": "Bekor qilish",
+        "success": "Status saqlandi.",
+        "unpaid": "To'lanmagan arizaga status qo'yib bo'lmaydi.",
+        "statusMissing": "Statuslar ro'yxatida bu holat topilmadi.",
+        "serviceError": "Ma'lumotnoma yaratilmadi, status saqlanmadi. Birozdan so'ng qayta urinib ko'ring.",
+        "error": "Statusni saqlab bo'lmadi. Qayta urinib ko'ring."
+      },
+      "details": {
+        "title": "Sertifikat tafsilotlari",
+        "number": "Sertifikat raqami",
+        "scores": "Bo'limlar bo'yicha ballar",
+        "edit": "Tahrirlash"
+      },
+      "candidate": {
+        "title": "Ariza beruvchi ma'lumotlari",
+        "fullName": "To'liq ism",
+        "pnfl": "JSHSHIR",
+        "passport": "Pasport raqami"
+      },
+      "file": {
+        "title": "Sertifikatni oldindan ko'rish",
+        "download": "Sertifikatni yuklab olish",
+        "openNewTab": "Yangi oynada ochish",
+        "zoomIn": "Kattalashtirish",
+        "zoomOut": "Kichiklashtirish",
+        "empty": "Sertifikat fayli yuklanmagan",
+        "loadError": "Faylni yuklab bo'lmadi",
+        "retry": "Qayta urinish",
+        "unsupported": "Bu turdagi faylni bu yerda ko'rsatib bo'lmaydi — uni yangi oynada oching yoki yuklab oling."
+      },
+      "status": {
+        "title": "Holat ma'lumotlari",
+        "current": "Joriy holat",
+        "submitted": "Topshirilgan sana",
+        "updated": "So'nggi yangilanish",
+        "recent": "So'nggi amallar",
+        "showAll": "Barcha tarixni ko'rsatish",
+        "showLess": "Faqat so'nggilarini ko'rsatish"
+      },
+      "edit": {
+        "title": "Arizani tahrirlash",
+        "subtitle": "Saqlangach ariza yana «Yangi» holatiga qaytadi va tekshiruv navbatiga tushadi",
+        "back": "Arizaga qaytish"
+      }
+    },
+    "applications": {
+      "subtitle": "Tekshiruvga yuborilgan to'langan arizalar va ularning holati",
+      "back": "Arizalarga qaytish"
+    },
+    "reviewCertificates": {
+      "title": "Sertifikatlar",
+      "searchLabel": "Sertifikatlarni qidirish",
+      "searchPlaceholder": "Raqam, nomzod JSHSHIR yoki pasporti bo'yicha",
+      "count": "Jami: {{count}}",
+      "view": "Ko'rish",
+      "tabs": {
+        "all": "Hammasi",
+        "pending": "Kutilayotgan",
+        "approved": "Tasdiqlangan",
+        "problem": "Muammoli",
+        "rejected": "Rad etilgan"
+      },
+      "columns": {
+        "number": "Raqami",
+        "candidate": "Nomzod",
+        "type": "Turi",
+        "language": "Til",
+        "degree": "Daraja",
+        "expert": "Ekspert",
+        "createdAt": "Yuborilgan vaqti",
+        "status": "Holati",
+        "actions": "Amallar"
+      },
+      "empty": {
+        "title": "Sertifikat yo'q",
+        "text": "Bu holatda sertifikatlar topilmadi."
+      },
+      "candidate": {
+        "title": "Nomzod",
+        "fullName": "F.I.Sh.",
+        "pnfl": "JSHSHIR",
+        "passport": "Pasport"
       }
     },
     "certificateForm": {

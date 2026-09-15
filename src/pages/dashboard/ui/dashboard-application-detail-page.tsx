@@ -1,32 +1,41 @@
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router'
+import { useLocation, useParams } from 'react-router'
 import { parseCertificateId, useCertificate } from '@/entities/certificate'
+import { useCurrentUser } from '@/entities/user'
 import { ROUTES } from '@/shared/config'
-import { CandidateCertificateActions } from './certificate-detail/candidate-certificate-actions'
+import { ApplicationReview } from './application-review/application-review'
 import { CertificateDetailSkeleton } from './certificate-detail/certificate-detail-skeleton'
-import { CertificateDetailView } from './certificate-detail/certificate-detail-view'
 import { CertificateLoadError } from './certificate-detail/certificate-load-error'
 import { DashboardPageHeader } from './dashboard-page-header'
+import { getBackPath } from './review-certificates/back-path'
 
-export function DashboardCertificateDetailPage() {
+/** Arizalar ro'yxatidan ochilgan arizani baholash sahifasi. */
+export function DashboardApplicationDetailPage() {
   const { t } = useTranslation()
+  const location = useLocation()
+  const { role } = useCurrentUser()
   const certificateId = parseCertificateId(useParams().id)
   const { certificate, isLoading, error, refetch } = useCertificate(certificateId)
-  const back = { to: ROUTES.certificates, label: t('dashboard.certificates.detail.back') }
+  const backTo = getBackPath(location.state, ROUTES.applications)
 
   if (certificate) {
+    // key: navbatda keyingi arizaga o'tilganda panel holati (tanlangan amal, masshtab) tozalanadi
     return (
-      <CertificateDetailView
+      <ApplicationReview
+        key={certificate.id}
         certificate={certificate}
-        back={back}
-        actions={<CandidateCertificateActions certificate={certificate} />}
+        isExpert={role === 'expert'}
+        backTo={backTo}
       />
     )
   }
 
   return (
     <div className="mx-auto max-w-7xl">
-      <DashboardPageHeader title={t('dashboard.certificates.detail.fallbackTitle')} back={back} />
+      <DashboardPageHeader
+        title={t('dashboard.certificates.detail.fallbackTitle')}
+        back={{ to: backTo, label: t('dashboard.applications.back') }}
+      />
       {isLoading ? (
         <CertificateDetailSkeleton />
       ) : (

@@ -44,8 +44,16 @@ export type CertificateDetail = CertificateListItem & {
   amount: string
   pay_url: string
   reference: string
-  /** Form-sxema bo'yicha qo'shimcha maydonlar — JSON satr */
-  extra_data: string
+  /** Bo'limlar ballari (swagger: ScoreRead[]); eski javoblarda JSON satr — parseExtraData() orqali o'qiladi */
+  extra_data: CertificateScore[] | string | null
+}
+
+/** swagger: ScoreRead */
+export type CertificateScore = {
+  id: number
+  /** Bo'lim NOMI (masalan "Reading"), ID emas */
+  section: string | null
+  score: string | null
 }
 
 /** GET /main/certificate-history/<id>/ elementi (swagger: CertificateHistoty) */
@@ -58,8 +66,14 @@ export type CertificateHistoryItem = {
   updated_at_str: string
 }
 
+/** `status` filtri sertifikatning oxirgi statusi bo'yicha ishlaydi */
+export type CertificateStatusFilter = 'new' | 'problem' | 'approved' | 'rejected'
+
 export type CertificatesParams = {
   search?: string
   page?: number
   page_size?: number
+  status?: CertificateStatusFilter
+  /** Admin uchun — shu ekspertga tegishli sertifikatlar */
+  expert?: number
 }

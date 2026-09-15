@@ -68,7 +68,7 @@ function buildItem(key: NavItemKey): DashboardMenuItem {
 // Sahifa ruxsatlari router'da (app/providers/router-provider.tsx) — ular mos bo'lishi kerak.
 const ROLE_MAIN_ITEM_KEYS: Record<UserRole, readonly NavItemKey[]> = {
   candidate: ["certificates", "newApplication"],
-  expert: ["dashboard", "applications", "reviews"],
+  expert: ["dashboard", "applications"],
   admin: ["dashboard", "experts", "applications", "forms"],
 };
 

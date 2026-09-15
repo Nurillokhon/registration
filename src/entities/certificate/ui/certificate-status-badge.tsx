@@ -25,6 +25,8 @@ function getStatusLabel(status: string | null | undefined, t: TFunction) {
 
   if (normalized === 'NEW') return t('dashboard.certificates.status.new')
   if (normalized === 'PROBLEM') return t('dashboard.certificates.status.problem')
+  if (normalized === 'APPROVED') return t('dashboard.certificates.status.approved')
+  if (normalized === 'REJECTED') return t('dashboard.certificates.status.rejected')
   return status?.trim() || t('dashboard.certificates.status.unknown')
 }
 
