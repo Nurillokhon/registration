@@ -7,6 +7,8 @@ import {
 import {
   DashboardAnalyticsPage,
   DashboardApplicationsPage,
+  DashboardCertificateDetailPage,
+  DashboardCertificateEditPage,
   DashboardCertificatesPage,
   DashboardExpertsPage,
   DashboardFormsPage,
@@ -44,6 +46,22 @@ const router = createBrowserRouter([
         element: (
           <RequireAuth roles={["candidate"]}>
             <DashboardCertificatesPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: ROUTES.certificateDetail,
+        element: (
+          <RequireAuth roles={["candidate"]}>
+            <DashboardCertificateDetailPage />
+          </RequireAuth>
+        ),
+      },
+      {
+        path: ROUTES.certificateEdit,
+        element: (
+          <RequireAuth roles={["candidate"]}>
+            <DashboardCertificateEditPage />
           </RequireAuth>
         ),
       },

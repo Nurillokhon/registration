@@ -1,5 +1,7 @@
 export { DashboardAnalyticsPage } from './ui/dashboard-analytics-page'
 export { DashboardApplicationsPage } from './ui/dashboard-applications-page'
+export { DashboardCertificateDetailPage } from './ui/dashboard-certificate-detail-page'
+export { DashboardCertificateEditPage } from './ui/dashboard-certificate-edit-page'
 export { DashboardCertificatesPage } from './ui/dashboard-certificates-page'
 export { DashboardExpertsPage } from './ui/dashboard-experts-page'
 export { DashboardFormsPage } from './ui/dashboard-forms-page'

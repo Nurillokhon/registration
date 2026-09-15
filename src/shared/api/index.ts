@@ -7,6 +7,7 @@ export {
   type MutateVariables,
   type RequestParams,
 } from './request-hooks'
+export type { Paginated } from './types'
 export {
   clearTokens,
   getAccessToken,

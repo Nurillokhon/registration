@@ -36,7 +36,8 @@ body {
    (focus-within:ring) chiziladi — ichki input'da ikkinchi chiziq chiqmasin.
    Tailwind'ning outline-none utilitasi bu yerda yordam bermaydi: yuqoridagi
    qoida @layer'siz, shuning uchun har qanday layer'dagi utilitadan ustun turadi. */
-[data-field-control] input:focus-visible {
+[data-field-control] input:focus-visible,
+[data-field-control] select:focus-visible {
   outline: none;
 }
 

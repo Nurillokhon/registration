@@ -18,9 +18,20 @@ function getPayload(error: unknown) {
   return undefined
 }
 
+// DRF serializer xatolari {"number": ["Bu maydon majburiy."]} ko'rinishida keladi —
+// umumiy message bo'lmasa, birinchi maydon xatosi ko'rsatiladi.
+function getFirstFieldError(payload: object | undefined) {
+  if (!payload) return undefined
+
+  for (const value of Object.values(payload)) {
+    if (Array.isArray(value) && typeof value[0] === 'string') return value[0]
+  }
+  return undefined
+}
+
 export function getApiErrorMessage(error: unknown, fallbackMessage: string) {
   const payload = getPayload(error)
-  return payload?.message || payload?.detail || fallbackMessage
+  return payload?.message || payload?.detail || getFirstFieldError(payload) || fallbackMessage
 }
 
 /** Javob tanasidagi "status" maydoni — HTTP kodi emas (masalan 2: "allaqachon tasdiqlangan"). */
